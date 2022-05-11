@@ -1,0 +1,81 @@
+{% load articles_tag %}
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/fontawesome-5.0.8/css/fontawesome-all.min.css' %}">
+
+    <title>Test Template</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8 p-b-80">
+                <div class="row">
+                    {% for article in page_obj %}
+                    <div class="col-sm-6 p-r-25 p-r-15-sr991">
+                        <!-- Item latest -->
+                        <div class="m-b-45">
+                            <a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
+                                <img src="{{article.cover.url}}" alt="IMG">
+                            </a>
+
+                            <div class="p-t-16">
+                                <h5 class="p-b-5">
+                                    <a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+                                        {{article.title}}
+                                    </a>
+                                </h5>
+
+                                <span class="cl8">
+                                    <a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
+                                        by {{article.author}}
+                                    </a>
+
+                                    <span class="f1-s-3 m-rl-3">
+                                        -
+                                    </span>
+
+                                    <span class="f1-s-3">
+                                        {{article.created_at}}
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex-wr-s-c m-rl--7 p-t-15">
+                    {% if page_obj.has_previous %}
+                    <a href="?page= {{ page_obj.previous_page_number }}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7">
+                        <span class="fa fa-chevron-left"></span>
+                    </a>
+                    {% endif %}
+                    {% for i in page_obj.paginator.page_range %}
+                    {% if page_obj.number == i %}
+                    <a href="?page= {{ page_obj.number }}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active">{{page_obj.number}}</a>
+                    {% else %}
+                    {% if i >= page_obj.number|add:-3 and i <= page_obj.number|add:3 %}
+                    <a href="?page= {{ i }}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7">{{ i }}</a>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <a href="?page= {{ page_obj.next_page_number }}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7">
+                        <span class="fa fa-chevron-right"></span>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+
+
+    </div>
+</body>
+
+</html>

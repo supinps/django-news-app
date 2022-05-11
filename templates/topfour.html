@@ -1,0 +1,33 @@
+{# display four recent posts against each subcategory #}
+{% for article in articles  %}
+<div class="col-3">
+    <!-- Item posts  -->
+    <div>
+        <a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
+            <img src="{{ article.cover.url }}" alt="IMG">
+        </a>
+
+        <div class="p-t-10">
+            <h5 class="p-b-5">
+                <a href="blog-detail-01.html" class="f1-s-5 cl3 hov-cl10 trans-03">
+                    {{ article.title }}
+                </a>
+            </h5>
+
+            <span class="cl8">
+                <a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
+                    {{ article.subcategory }}
+                </a>
+
+                <span class="f1-s-3 m-rl-3">
+                    -
+                </span>
+
+                <span class="f1-s-3">
+                    {{ article.created_at }}
+                </span>
+            </span>
+        </div>
+    </div>
+</div>
+{% endfor %}
